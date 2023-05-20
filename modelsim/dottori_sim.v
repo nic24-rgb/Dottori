@@ -52,7 +52,7 @@ reg [3:0] COUNT_IC12;
 reg [3:0] COUNT_IC13;
 
 // Half clock delay (125ns)
-spram #(14,8,"vram_test5.txt") MEM_ROM( //14479a.txt   vram_test.txt
+spram #(14,8,"vram_test.txt") MEM_ROM( //14479a.txt   vram_test.txt
 	.clk(~CLK_4M),
 	.address({1'b0,ADDRESS_BUS[12:0]}), 
 	.data(),
