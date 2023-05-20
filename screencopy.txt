@@ -1,0 +1,112 @@
+      ORG $0000
+      DI
+      LD SP,$8800
+      IM 1
+      LD A,$05
+      LD ($8600),A
+      XOR A
+      LD A,($8600)
+      LD HL,$8000
+      LD DE,$8001
+      LD BC,$0600
+      LD (HL),$0
+      LDIR
+      LD A,$B8
+      OUT ($00),A 
+      LD HL,$1000
+      LD DE,$8000
+      LD BC,$0600
+      LDIR
+      EI
+      NOP
+LOOP  NOP
+      JP LOOP
+      NOP
+      NOP
+      NOP
+      NOP
+      NOP
+      NOP
+      NOP
+SEC1  PUSH HL
+      PUSH DE
+      PUSH BC
+      IN A,($00)
+      CPL
+      OR A
+      CP $0
+      JR NZ,SEC2
+      LD HL,$1530
+      LD DE,$8530
+      LD BC,$80
+      JP SEC3
+SEC2  LD HL,$1700
+      LD DE,$8530
+      LD BC,$80
+SEC3  LDIR
+      POP BC
+      POP DE
+      POP HL
+      EI
+      RET
+
+0000                          .ORG   $0000   
+0000   F3                     DI   
+0001   31 00 88               LD   SP,$8800   
+0004   ED 56                  IM   1   
+0006   3E 05                  LD   A,$05   
+0008   32 00 86               LD   ($8600),A   
+000B   AF                     XOR   A   
+000C   3A 00 86               LD   A,($8600)   
+000F   21 00 80               LD   HL,$8000   
+0012   11 01 80               LD   DE,$8001   
+0015   01 00 06               LD   BC,$0600   
+0018   36 00                  LD   (HL),$0   
+001A   ED B0                  LDIR   
+001C   3E B8                  LD   A,$B8   
+001E   D3 00                  OUT   ($00),A   
+0020   21 00 10               LD   HL,$1000   
+0023   11 00 80               LD   DE,$8000   
+0026   01 00 06               LD   BC,$0600   
+0029   ED B0                  LDIR   
+002B   FB                     EI   
+002C   00                     NOP   
+002D   00           LOOP:     NOP   
+002E   C3 2D 00               JP   LOOP   
+0031   00                     NOP   
+0032   00                     NOP   
+0033   00                     NOP   
+0034   00                     NOP   
+0035   00                     NOP   
+0036   00                     NOP   
+0037   00                     NOP   
+0038   E5           SEC1:     PUSH   HL   
+0039   D5                     PUSH   DE   
+003A   C5                     PUSH   BC   
+003B   DB 00                  IN   A,($00)   
+003D   2F                     CPL   
+003E   B7                     OR   A   
+003F   FE 00                  CP   $0   
+0041   20 0C                  JR   NZ,SEC2   
+0043   21 30 15               LD   HL,$1530   
+0046   11 30 85               LD   DE,$8530   
+0049   01 80 00               LD   BC,$80   
+004C   C3 58 00               JP   SEC3   
+004F   21 00 17     SEC2:     LD   HL,$1700   
+0052   11 30 85               LD   DE,$8530   
+0055   01 80 00               LD   BC,$80   
+0058   ED B0        SEC3:     LDIR   
+005A   C1                     POP   BC   
+005B   D1                     POP   DE   
+005C   E1                     POP   HL   
+005D   FB                     EI   
+005E   C9                     RET   
+
+
+LOOP:               002D DEFINED AT LINE 22
+                    > USED AT LINE 23
+SEC1:               0038 DEFINED AT LINE 31
+SEC2:               004F DEFINED AT LINE 43
+                    > USED AT LINE 38
+SEC3:               0058 DEFINED AT LINE 46
+                    > USED AT LINE 42
